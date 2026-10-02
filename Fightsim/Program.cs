@@ -16,7 +16,7 @@ int skada;
 
 
 
-while (svar != "Y" || svar != "y")
+while (svar != "Y" && svar != "y")
 {
     Console.WriteLine("Välj namn för spelare 1");
 
@@ -27,7 +27,7 @@ while (svar != "Y" || svar != "y")
     svar = Console.ReadLine();
 }
 string svar2 = "";
-while (svar2 != "Y" || svar2 != "y")
+while (svar2 != "Y" && svar2 != "y")
 {
     Console.WriteLine("Välj namn för spelare 2");
 
@@ -38,7 +38,7 @@ while (svar2 != "Y" || svar2 != "y")
 }
 
 Console.WriteLine("Spelare 1  är " + name1 + " och spelare 2 är " + name2);
-Thread.Sleep(2000);
+Thread.Sleep(1000);
 while (HP1 > 0 || HP2 > 100)
 {
 Runda = Runda + 1; 
@@ -48,24 +48,39 @@ Console.WriteLine(name1 + " har " + HP1 + " HP och " + name2 +  " har " + HP2 + 
 Thread.Sleep(1000);
 skada = Random.Shared.Next(10,30);
 Console.WriteLine(name1 +" gör " + skada + " skada");
-HP1 = HP1 - skada;
-Thread.Sleep(1000);
-skada = Random.Shared.Next(10,30);
-Console.WriteLine(name2 + " gör " + skada + " skada");
 HP2 = HP2 - skada;
 Thread.Sleep(1000);
-}
-if (HP1 < 1)
-{
-    Console.WriteLine("<---+Match Över+--->");
-    Console.WriteLine(name1 + " Vinner");
-}
-if (HP2 < 1)
-{
-    Console.WriteLine("<---+Match Över+--->");
-    Console.WriteLine(name2 + " Vinner");
-}
+    if (HP1 < 1)
+    {
+        Console.WriteLine("<---+Match Över+--->");
+        Console.WriteLine(name2 + " Vinner");
+        break;
+    }
+    if (HP2 < 1)
+    {
+        Console.WriteLine("<---+Match Över+--->");
+        Console.WriteLine(name1 + " Vinner");
+        break;
+    }
 
+skada = Random.Shared.Next(10,30);
+Console.WriteLine(name2 + " gör " + skada + " skada");
+HP1 = HP1 - skada;
+Thread.Sleep(1000);
+    if (HP1 < 1)
+    {
+        Console.WriteLine("<---+Match Över+--->");
+        Console.WriteLine(name2 + " Vinner");
+        break;
+    }
+    if (HP2 < 1)
+    {
+        Console.WriteLine("<---+Match Över+--->");
+        Console.WriteLine(name1 + " Vinner");
+        break;
+    }
+}
+Console.ReadLine();
 
 
 
